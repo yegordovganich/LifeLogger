@@ -1,0 +1,17 @@
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+
+<VBox fx:controller="client.gui.Controller" xmlns:fx="http://javafx.com/fxml" alignment="CENTER" spacing="10">
+    <children>
+        <HBox spacing="10" alignment="CENTER">
+            <children>
+                <Label text="Current counter's value:"/>
+                <TextField fx:id="counterValue"/>
+            </children>
+        </HBox>
+        <Button fx:id="sendButton" text="Send"/>
+    </children>
+</VBox>
