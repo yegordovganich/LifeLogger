@@ -1,4 +1,4 @@
-package data;
+package lifelogger.data;
 
 /**
  * Created by y.dovganich on 12.04.2017.

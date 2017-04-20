@@ -1,13 +1,13 @@
-package client.gui;
+package lifelogger.client.gui;
 
-import data.Address;
-import data.MeterData;
-import data.MeterTypes;
+import lifelogger.data.Address;
+import lifelogger.data.MeterData;
+import lifelogger.data.MeterTypes;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputControl;
-import recorder.Recorder;
+import lifelogger.recorder.Recorder;
 
 import java.awt.*;
 import java.net.URL;
@@ -42,7 +42,7 @@ public class Controller implements Initializable {
 
     private void sendMeterData(Recorder recorder, String value) {
         new Thread(() -> {
-            // TODO: check input data
+            // TODO: check input lifelogger.data
             EventQueue.invokeLater(() -> {
                 try {
                     MeterData data = new MeterData(new Address(), MeterTypes.COLD_WATER, Integer.valueOf(value));

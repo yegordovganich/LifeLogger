@@ -1,6 +1,6 @@
-package recorder;
+package lifelogger.recorder;
 
-import data.MeterData;
+import lifelogger.data.MeterData;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
