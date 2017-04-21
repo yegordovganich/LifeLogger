@@ -2,8 +2,13 @@ package lifelogger.data;
 
 import java.io.Serializable;
 
+import javax.persistence.Cacheable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -14,24 +19,28 @@ import org.hibernate.annotations.GenericGenerator;
  */
 
 @Entity
-@Table(name = "METER_DATA")
+@Table(name = "meter_data")
 public class MeterData implements Serializable {
 	private static final long serialVersionUID = 7454338882150271407L;
 	
 	@Id
-	@GeneratedValue(generator = "increment")
-	@GenericGenerator(name = "increment", strategy = "uncrement")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-//    private Address address;
-//    private MeterTypes type;
-    private int value;
+
+	// @Type(type = "address")
+//	private transient Address address;
+    
+	@Enumerated(EnumType.STRING)
+	@Column(name = "meter_type")
+	private MeterType type;
+	
+	private int value;
 
     public MeterData(){}
     
     public int getId() {
 		return id;
 	}
-
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -43,32 +52,31 @@ public class MeterData implements Serializable {
 //	public void setAddress(Address address) {
 //		this.address = address;
 //	}
-//
-//	public MeterTypes getType() {
-//		return type;
-//	}
-//
-//	public void setType(MeterTypes type) {
-//		this.type = type;
-//	}
+
+	public MeterType getType() {
+    	return type;
+    }
+	public void setType(MeterType type) {
+    	this.type = type;
+    }
 
 	public int getValue() {
 		return value;
 	}
-
 	public void setValue(int value) {
 		this.value = value;
 	}
 
-	public MeterData(Address address, MeterTypes type, int value) {
-//        this.address = address;
-//        this.type = type;
+	public MeterData(Address address, MeterType type, int value) {
+		// this.address = address;
+        this.type = type;
         this.value = value;
     }
 
     @Override
     public String toString() {
         // return address.toString() + " / " + type + " / " + value;
-    	return "" + value;
+    	return type + " / " + value;
+    	// return "";
     }
 }

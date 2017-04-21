@@ -2,7 +2,7 @@ package lifelogger.client.gui;
 
 import lifelogger.data.Address;
 import lifelogger.data.MeterData;
-import lifelogger.data.MeterTypes;
+import lifelogger.data.MeterType;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -45,7 +45,7 @@ public class Controller implements Initializable {
             // TODO: check input lifelogger.data
             EventQueue.invokeLater(() -> {
                 try {
-                    MeterData data = new MeterData(new Address(), MeterTypes.COLD_WATER, Integer.valueOf(value));
+                    MeterData data = new MeterData(new Address(), MeterType.HOT_WATER, Integer.valueOf(value));
                     recorder.addData(data);
                 } catch (RemoteException e) {
                     System.out.println("Error when sending MeterData.");
