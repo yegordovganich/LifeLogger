@@ -1,5 +1,6 @@
 package lifelogger.recorder;
 
+import lifelogger.data.Address;
 import lifelogger.data.MeterData;
 import lifelogger.server.JPAFactory;
 
@@ -29,7 +30,13 @@ public class RecorderClass extends UnicastRemoteObject implements Recorder {
 	public static void saveMeterData(MeterData data) {
 		EntityManager entityManager = JPAFactory.getEntityManagerFactory().createEntityManager();
 		entityManager.getTransaction().begin();
+
+		// stub for address
+		Address address = entityManager.find(Address.class, 1);
+		data.setAddress(address);
+
 		entityManager.persist(data);
+
 		entityManager.getTransaction().commit();
 		entityManager.close();
 	}

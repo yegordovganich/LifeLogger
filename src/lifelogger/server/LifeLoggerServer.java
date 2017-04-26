@@ -27,11 +27,18 @@ public class LifeLoggerServer {
             e.printStackTrace();
         }
         
-		MeterData data = new MeterData(new Address(), MeterType.HOT_WATER, 6686);
+
+
         EntityManager entityManager = JPAFactory.getEntityManagerFactory().createEntityManager();
 		entityManager.getTransaction().begin();
-		entityManager.persist(data);
-		entityManager.getTransaction().commit();
+
+        // stub for address
+		Address address = entityManager.find(Address.class, 1);
+
+        MeterData data = new MeterData(address, MeterType.HOT_WATER, 6686);
+        entityManager.persist(data);
+
+        entityManager.getTransaction().commit();
 		entityManager.close();
 
     }

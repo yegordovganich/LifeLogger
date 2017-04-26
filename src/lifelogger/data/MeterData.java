@@ -1,18 +1,13 @@
 package lifelogger.data;
 
+import org.hibernate.annotations.*;
+
 import java.io.Serializable;
 
-import javax.persistence.Cacheable;
-import javax.persistence.Column;
+import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.ForeignKey;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * Created by y.dovganich on 12.04.2017.
@@ -27,8 +22,9 @@ public class MeterData implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-	// @Type(type = "address")
-//	private transient Address address;
+	@ManyToOne/*(cascade = CascadeType.ALL)*/
+	@JoinColumn(name = "address_id"/*, foreignKey = @ForeignKey(name = "FK_meter_data_address_key"), updatable = false*/)
+	private Address address;
     
 	@Enumerated(EnumType.STRING)
 	@Column(name = "meter_type")
@@ -37,21 +33,26 @@ public class MeterData implements Serializable {
 	private int value;
 
     public MeterData(){}
-    
-    public int getId() {
+
+	public MeterData(Address address, MeterType type, int value) {
+		this.address = address;
+		this.type = type;
+		this.value = value;
+	}
+
+	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
 
-//	public Address getAddress() {
-//		return address;
-//	}
-//
-//	public void setAddress(Address address) {
-//		this.address = address;
-//	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
 
 	public MeterType getType() {
     	return type;
@@ -67,16 +68,9 @@ public class MeterData implements Serializable {
 		this.value = value;
 	}
 
-	public MeterData(Address address, MeterType type, int value) {
-		// this.address = address;
-        this.type = type;
-        this.value = value;
-    }
-
     @Override
     public String toString() {
-        // return address.toString() + " / " + type + " / " + value;
-    	return type + " / " + value;
-    	// return "";
+        return address.toString() + " / " + type + " / " + value;
+    	// return type + " / " + value;
     }
 }

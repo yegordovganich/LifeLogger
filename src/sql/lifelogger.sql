@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 25 2017 г., 14:35
+-- Время создания: Апр 26 2017 г., 15:40
 -- Версия сервера: 5.6.15-log
 -- Версия PHP: 5.5.8
 
@@ -23,22 +23,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `addresses`
+-- Структура таблицы `address`
 --
 
-CREATE TABLE IF NOT EXISTS `addresses` (
+CREATE TABLE IF NOT EXISTS `address` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `city` varchar(255) NOT NULL,
-  `street` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `address` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `address` (`address`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `addresses`
+-- Дамп данных таблицы `address`
 --
 
-INSERT INTO `addresses` (`id`, `city`, `street`) VALUES
-(1, 'Kyiv', 'Khreschatik');
+INSERT INTO `address` (`id`, `address`) VALUES
+(1, 'Kyiv, Khreschatyk');
 
 -- --------------------------------------------------------
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `meter_data` (
   `address_id` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `FK_meter_data_address_key` (`address_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `meter_data` (
 -- Ограничения внешнего ключа таблицы `meter_data`
 --
 ALTER TABLE `meter_data`
-  ADD CONSTRAINT `FK_meter_data_address_key` FOREIGN KEY (`address_id`) REFERENCES `addresses` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_meter_data_address_key` FOREIGN KEY (`address_id`) REFERENCES `address` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
