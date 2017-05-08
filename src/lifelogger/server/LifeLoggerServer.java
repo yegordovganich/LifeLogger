@@ -29,6 +29,7 @@ public class LifeLoggerServer {
         
 
 
+/*
         EntityManager entityManager = JPAFactory.getEntityManagerFactory().createEntityManager();
 		entityManager.getTransaction().begin();
 
@@ -40,6 +41,7 @@ public class LifeLoggerServer {
 
         entityManager.getTransaction().commit();
 		entityManager.close();
+*/
 
     }
 }

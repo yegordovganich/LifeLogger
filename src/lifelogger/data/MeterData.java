@@ -23,7 +23,7 @@ public class MeterData implements Serializable {
     private int id;
 
 	@ManyToOne/*(cascade = CascadeType.ALL)*/
-	@JoinColumn(name = "address_id"/*, foreignKey = @ForeignKey(name = "FK_meter_data_address_key"), updatable = false*/)
+	@JoinColumn(name = "address_id")
 	private Address address;
     
 	@Enumerated(EnumType.STRING)
@@ -71,6 +71,5 @@ public class MeterData implements Serializable {
     @Override
     public String toString() {
         return address.toString() + " / " + type + " / " + value;
-    	// return type + " / " + value;
     }
 }
