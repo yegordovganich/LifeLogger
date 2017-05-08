@@ -1,12 +1,10 @@
 package lifelogger.data;
 
-import org.hibernate.annotations.*;
-
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.persistence.*;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.Table;
 
 /**
@@ -32,12 +30,15 @@ public class MeterData implements Serializable {
 	
 	private int value;
 
+	private LocalDateTime timestamp;
+
     public MeterData(){}
 
-	public MeterData(Address address, MeterType type, int value) {
+	public MeterData(Address address, MeterType type, int value, LocalDateTime timestamp) {
 		this.address = address;
 		this.type = type;
 		this.value = value;
+		this.timestamp = timestamp;
 	}
 
 	public int getId() {
@@ -68,7 +69,15 @@ public class MeterData implements Serializable {
 		this.value = value;
 	}
 
-    @Override
+	public LocalDateTime getTimestamp() {
+		return timestamp;
+	}
+	public void setTimestamp(LocalDateTime timestamp) {
+		this.timestamp = timestamp;
+	}
+
+
+	@Override
     public String toString() {
         return address.toString() + " / " + type + " / " + value;
     }

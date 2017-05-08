@@ -1,5 +1,6 @@
 package lifelogger.client.gui;
 
+import javafx.scene.control.DatePicker;
 import lifelogger.data.Address;
 import lifelogger.data.MeterData;
 import lifelogger.data.MeterType;
@@ -15,15 +16,24 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     @FXML private TextInputControl counterValue;
+    @FXML private DatePicker datePicker;
     @FXML private Button sendButton;
+
+    private LocalDate timestamp;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         bindSendButtonAction();
+
+        datePicker.setValue(LocalDate.now());
+        datePicker.setOnAction(__ -> timestamp = datePicker.getValue());
     }
 
     private void bindSendButtonAction() {
@@ -44,8 +54,15 @@ public class Controller implements Initializable {
         new Thread(() -> {
             // TODO: check input lifelogger.data
             EventQueue.invokeLater(() -> {
+                if (timestamp == null) timestamp = LocalDate.now();
+                MeterData data = new MeterData(
+                        new Address(), // stub for address
+                        MeterType.HOT_WATER,
+                        Integer.valueOf(value),
+                        LocalDateTime.of(timestamp, LocalTime.now())
+                );
+
                 try {
-                    MeterData data = new MeterData(new Address(), MeterType.HOT_WATER, Integer.valueOf(value));
                     recorder.addData(data);
                 } catch (RemoteException e) {
                     System.out.println("Error when sending MeterData.");

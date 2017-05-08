@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Хост: 127.0.0.1
--- Время создания: Апр 26 2017 г., 15:40
+-- Время создания: Май 08 2017 г., 15:50
 -- Версия сервера: 5.6.15-log
 -- Версия PHP: 5.5.8
 
@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `meter_data` (
   `value` int(11) unsigned NOT NULL,
   `meter_type` enum('ELECTRICAL_ENERGY','HOT_WATER','COLD_WATER') NOT NULL,
   `address_id` int(11) NOT NULL DEFAULT '1',
+  `timestamp` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_meter_data_address_key` (`address_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
