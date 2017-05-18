@@ -9,6 +9,7 @@ import lifelogger.recorder.RecorderClass;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.time.LocalDateTime;
 
 import javax.persistence.EntityManager;
 
@@ -36,7 +37,7 @@ public class LifeLoggerServer {
         // stub for address
 		Address address = entityManager.find(Address.class, 1);
 
-        MeterData data = new MeterData(address, MeterType.HOT_WATER, 6686);
+        MeterData data = new MeterData(address, MeterType.HOT_WATER, 6686, LocalDateTime.now());
         entityManager.persist(data);
 
         entityManager.getTransaction().commit();

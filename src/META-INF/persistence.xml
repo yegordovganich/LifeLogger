@@ -4,7 +4,7 @@
              version="2.0">
 
     <persistence-unit name="lifelogger.jpa">
-        <class>lifelogger.data.MeterData</class>
+        <!--<class>lifelogger.data.MeterData</class>-->
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
@@ -13,7 +13,7 @@
             <property name="javax.persistence.jdbc.password" value="" />
 
             <property name="hibernate.show_sql" value="true" />
-
+            <property name="hibernate.archive.autodetection" value="class, hbm"/>
             <!--  <property name="hibernate.hbm2ddl.auto" value="create" />  -->
             
         </properties>
